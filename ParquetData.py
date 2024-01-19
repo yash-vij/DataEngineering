@@ -1,0 +1,11 @@
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("local[2]").appName("dataSources").getOrCreate()
+#df = spark.read.load("C:/Users/yashv/Spark Programs/Spark/spark-3.5.0-bin-hadoop3/examples/src/main/resources/users.parquet")
+#print(df.show())
+#df.select("name","favorite_color").write.save("C:/Users/yashv/Spark Programs/Spark/spark-3.5.0-bin-hadoop3/examples/src/main/resources/parquetColors.parquet")
+df2 = spark.read.load("hello.txt",format= "text")
+print(df2.show())
+#df2.write.save("hello.json",format="json")
+df3=spark.read.option("header",True).json("hello.json")
+print(df3.show())
+print(df3.printSchema())
